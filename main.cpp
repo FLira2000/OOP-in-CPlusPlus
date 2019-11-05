@@ -1,59 +1,57 @@
 #include <iostream>
 
-class InformationContainer
+class Data
 {
 private:
     char* data;
 public:
-    InformationContainer(){
-        std::cout<< "\nconstructor container \n";
+    Data(){}
+
+    Data( char *newData ){
+        Data::setData(newData);
     }
 
-    InformationContainer( char *newData ){
-        InformationContainer::setData(newData);
-    }
-
-    ~InformationContainer(){
-        std::cout<< "\ndeconstructor container \n";
-    };
+    ~Data(){};
 
     void setData(char *newData){
-        InformationContainer::data = newData;
+        Data::data = newData;
     }
 
     char* getData( void ){
-        return InformationContainer::data;
+        return Data::data;
     }
 };
 
-class InformationHandler
+class Container
 {
 private:
     /**/
 public:
-    InformationContainer container;
-    InformationHandler( InformationContainer ic1 ){
+    Data container;
+    Container(){};
+
+    Container( Data ic1 ){
         setContainer(ic1);
     };
-    ~InformationHandler(){};
+    ~Container(){};
 
-    void setContainer( InformationContainer ic1 ){
-        InformationHandler::container = ic1;
+    void setContainer( Data ic1 ){
+        Container::container = ic1;
     }
 
-    InformationContainer getContainer(){
-        return InformationHandler::container;
+    Data getContainer(){
+        return Container::container;
     }
 };
 
 int main(int argc, char const *argv[])
 {
-    InformationContainer ic1;
-    ic1.setData( (char*) "Fabio");
-    std::cout << ic1.getData();
-    InformationHandler ih1(ic1);
-    ih1.container.setData( (char*) "Adrielly");
-    InformationContainer tempContainer = ih1.getContainer();
-    std::cout << tempContainer.getData();
+    Data d1;
+    d1.setData( (char*) "Fabio");
+    std::cout << d1.getData() << "\n";
+    Container c1(d1);
+    c1.container.setData( (char*) "Adrielly");
+    Data tempContainer = c1.getContainer();
+    std::cout << tempContainer.getData() << "\n";
     return 0;
 }
